@@ -4,12 +4,8 @@ const Sequelize = require('sequelize');
 
 const sequelize = process.env.JAWSDB_URL
   ? new Sequelize(process.env.JAWSDB_URL)
-  : new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-      host: 'localhost',
-      dialect: 'mysql',
-      dialectOptions: {
-        decimalNumbers: true,
-      },
-    });
+  : (process.env.MYSQL_URL)
+    ? new Sequelize(process.env.MYSQL_URL)
+    : console.log("please add a database url to the enviornment variable")
 
 module.exports = sequelize;
